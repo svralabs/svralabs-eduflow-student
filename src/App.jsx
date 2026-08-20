@@ -1,64 +1,39 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import { CartProvider } from './context/CartContext';
-import { ThemeProvider } from './context/ThemeContext';
-import ErrorBoundary from './components/ErrorBoundary';
-import HomeworkSearch from './pages/HomeworkSearch';
-import CalendarExams from './pages/CalendarExams';
-import TransactionDetail from './pages/TransactionDetail';
-
-function ScreenBar() {
-  const loc = useLocation();
-  const navs = [
-    { path: '/', label: 'HomeworkSearch' },
-    { path: '/calendarexams', label: 'CalendarExams' },
-    { path: '/transactiondetail', label: 'TransactionDetail' }
-  ];
-
-  return (
-    <div className="fixed top-2 left-1/2 -translate-x-1/2 z-50 bg-slate-900/90 backdrop-blur-md border border-slate-700/60 rounded-full px-3 py-1.5 shadow-2xl flex items-center gap-1.5 overflow-x-auto max-w-[95vw]">
-      <span className="text-[10px] font-bold text-violet-400 uppercase tracking-widest px-2 hidden sm:inline">Screens:</span>
-      {navs.map((n) => {
-        const active = loc.pathname === n.path;
-        return (
-          <Link
-            key={n.path}
-            to={n.path}
-            className={`px-3 py-1 text-xs font-semibold rounded-full transition-all whitespace-nowrap ${
-              active
-                ? 'bg-violet-600 text-white shadow-md shadow-violet-500/30'
-                : 'text-slate-300 hover:text-white hover:bg-slate-800'
-            }`}
-          >
-            {n.label}
-          </Link>
-        );
-      })}
-    </div>
-  );
-}
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Screen1DashboardHome from './pages/Screen1DashboardHome';
+import Screen2HomeworkSearch from './pages/Screen2HomeworkSearch';
+import Screen3CalendarExamsSchedule from './pages/Screen3CalendarExamsSchedule';
+import DetailTransaksi from './pages/DetailTransaksi';
 
 export default function App() {
   return (
-    <ErrorBoundary>
-      <AuthProvider>
-        <CartProvider>
-          <ThemeProvider>
-            <BrowserRouter>
-              <ScreenBar />
-              <div className="pt-10 min-h-screen">
-                <Routes>
-                  <Route path='/' element={<HomeworkSearch />} />
-        <Route path='/calendarexams' element={<CalendarExams />} />
-        <Route path='/transactiondetail' element={<TransactionDetail />} />
-                  <Route path="*" element={<HomeworkSearch />} />
-                </Routes>
-              </div>
-            </BrowserRouter>
-          </ThemeProvider>
-        </CartProvider>
-      </AuthProvider>
-    </ErrorBoundary>
+    <BrowserRouter>
+      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-indigo-500 selection:text-white">
+        {/* Navigation Header for Multi-Screen Stitch Pages */}
+        <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800 px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+            <span className="font-bold text-sm tracking-wide text-white capitalize">eduflow-student</span>
+          </div>
+          <nav className="flex items-center space-x-2 overflow-x-auto py-1">
+            <Link to="/" className="px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 transition">Screen 1 Dashboard Home</Link>
+            <Link to="/screen-2-homework-search" className="px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 transition">Screen 2 Homework Search</Link>
+            <Link to="/screen-3-calendar-exams-schedule" className="px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 transition">Screen 3 Calendar Exams Schedule</Link>
+            <Link to="/detail-transaksi" className="px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-white/10 transition">Detail Transaksi</Link>
+          </nav>
+        </header>
+
+        {/* Dynamic Routed Pages */}
+        <main className="flex-1 w-full">
+          <Routes>
+          <Route path="/" element={<Screen1DashboardHome />} />
+          <Route path="/screen-2-homework-search" element={<Screen2HomeworkSearch />} />
+          <Route path="/screen-3-calendar-exams-schedule" element={<Screen3CalendarExamsSchedule />} />
+          <Route path="/detail-transaksi" element={<DetailTransaksi />} />
+          <Route path="*" element={<Screen1DashboardHome />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
