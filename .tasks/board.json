@@ -8,18 +8,19 @@
       "model": "hermes-auto",
       "title": "Build Dashboard Home page (screen_1_dashboard_home)",
       "source_screen": "screen_1_dashboard_home",
-      "description": "Convert Stitch HTML to React component. Extract reusable widgets (announcements, upcoming tasks, quick actions) into separate components. Use Tailwind for styling. Preserve all visual fidelity.",
+      "description": "Convert Stitch HTML to React component. Extract reusable widgets (announcements, upcoming deadlines, quick actions) into separate components. Use Tailwind for styling. Preserve all visual fidelity and interactions (hover, click).",
       "target_files": [
         "src/pages/DashboardHome.jsx",
         "src/components/AnnouncementCard.jsx",
-        "src/components/UpcomingTaskList.jsx",
+        "src/components/UpcomingDeadline.jsx",
         "src/components/QuickActionButton.jsx"
       ],
       "acceptance_criteria": [
+        "Component renders without errors",
         "Pixel-perfect match to Stitch design",
-        "All interactive elements (buttons, links) functional",
-        "Responsive behavior preserved",
-        "No console errors"
+        "All interactive elements functional (hover states, click handlers)",
+        "Responsive across breakpoints (mobile, tablet, desktop)",
+        "No console warnings/errors"
       ],
       "status": "DONE"
     },
@@ -29,17 +30,19 @@
       "model": "hermes-auto",
       "title": "Build Homework Search page (screen_2_homework_search)",
       "source_screen": "screen_2_homework_search",
-      "description": "Convert Stitch HTML to React component. Implement search functionality (client-side filter). Extract search bar and homework card components. Preserve all visual fidelity.",
+      "description": "Create search interface with filters (subject, due date, status). Implement search results list with pagination. Extract search bar and filter panel into reusable components. Add client-side search/filter logic (debounced input).",
       "target_files": [
         "src/pages/HomeworkSearch.jsx",
         "src/components/SearchBar.jsx",
+        "src/components/FilterPanel.jsx",
         "src/components/HomeworkCard.jsx"
       ],
       "acceptance_criteria": [
-        "Pixel-perfect match to Stitch design",
-        "Search filters work (subject, due date, status)",
-        "Results update in real-time",
-        "No console errors"
+        "Search functionality works with debounce (300ms)",
+        "Filters update results in real-time",
+        "Pagination controls functional",
+        "Empty state handling",
+        "Visual match to Stitch design"
       ],
       "status": "DONE"
     },
@@ -47,19 +50,19 @@
       "id": "TASK-003",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Build Calendar & Exams Schedule page (screen_3_calendar_exams_schedule)",
+      "title": "Build Calendar/Exams Schedule page (screen_3_calendar_exams_schedule)",
       "source_screen": "screen_3_calendar_exams_schedule",
-      "description": "Convert Stitch HTML to React component. Implement calendar view (use react-big-calendar or native solution if simpler). Extract exam card component. Preserve all visual fidelity.",
+      "description": "Implement calendar view with exam schedule overlay. Use react-big-calendar or similar for calendar component. Extract event cards into reusable component. Add month/week/day view toggle. Sync with mock API data.",
       "target_files": [
         "src/pages/CalendarExams.jsx",
-        "src/components/ExamCard.jsx"
+        "src/components/ExamEventCard.jsx"
       ],
       "acceptance_criteria": [
-        "Pixel-perfect match to Stitch design",
-        "Calendar displays current month by default",
-        "Exams marked on correct dates",
-        "Month navigation works",
-        "No console errors"
+        "Calendar renders with events",
+        "View toggle works (month/week/day)",
+        "Event details show on click",
+        "Responsive layout",
+        "Visual match to Stitch design"
       ],
       "status": "DONE"
     },
@@ -69,16 +72,17 @@
       "model": "hermes-auto",
       "title": "Build Transaction Detail page (detail_transaksi)",
       "source_screen": "detail_transaksi",
-      "description": "Convert Stitch HTML to React component. Extract transaction item component. Preserve all visual fidelity. Add back button functionality.",
+      "description": "Create transaction detail view with payment breakdown, status timeline, and action buttons. Extract timeline component. Add print/download functionality for receipts. Implement status badge logic.",
       "target_files": [
         "src/pages/TransactionDetail.jsx",
-        "src/components/TransactionItem.jsx"
+        "src/components/StatusTimeline.jsx"
       ],
       "acceptance_criteria": [
-        "Pixel-perfect match to Stitch design",
-        "All transaction details displayed correctly",
-        "Back button returns to previous page",
-        "No console errors"
+        "All transaction data displays correctly",
+        "Status timeline renders properly",
+        "Print/download buttons functional",
+        "Responsive layout",
+        "Visual match to Stitch design"
       ],
       "status": "DONE"
     },
@@ -86,19 +90,19 @@
       "id": "TASK-005",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Create shared layout components (Header, Sidebar, Footer)",
+      "title": "Create shared layout components",
       "source_screen": "",
-      "description": "Extract common layout elements from all screens. Build responsive header with user menu. Build collapsible sidebar with navigation. Build footer with copyright info.",
+      "description": "Build reusable layout components: header, sidebar, footer. Implement responsive navigation. Add dark/light mode toggle. Extract into src/components/layout/.",
       "target_files": [
-        "src/components/Header.jsx",
-        "src/components/Sidebar.jsx",
-        "src/components/Footer.jsx"
+        "src/components/layout/Header.jsx",
+        "src/components/layout/Sidebar.jsx",
+        "src/components/layout/Footer.jsx"
       ],
       "acceptance_criteria": [
-        "Consistent across all pages",
-        "Sidebar collapses on small screens",
-        "Active route highlighted in navigation",
-        "No console errors"
+        "Components render without errors",
+        "Responsive behavior works",
+        "Dark/light mode toggle functional",
+        "Consistent styling across pages"
       ],
       "status": "DONE"
     },
@@ -106,23 +110,23 @@
       "id": "TASK-006",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Implement routing and app shell (src/App.jsx)",
+      "title": "Set up routing and app shell",
       "source_screen": "",
-      "description": "Set up React Router v6. Configure routes for all pages. Implement layout with header, sidebar, main content area. Add 404 page. Ensure navigation works between all screens.",
+      "description": "Configure React Router. Create app shell with persistent layout components. Implement route guards for auth. Add 404 page. Wire up all page components.",
       "target_files": [
         "src/App.jsx",
+        "src/routes.jsx",
         "src/pages/NotFound.jsx"
       ],
       "acceptance_criteria": [
         "All routes load correct components",
-        "Navigation between pages works",
-        "404 page displays for unknown routes",
-        "Layout consistent across all pages",
-        "No console errors"
+        "Layout persists across navigation",
+        "404 page shows for invalid routes",
+        "No route flashes or layout shifts"
       ],
       "status": "DONE"
     }
   ],
   "status": "IN_PROGRESS",
-  "updated_at": "2026-08-20 17:13:03"
+  "updated_at": "2026-08-20 18:56:53"
 }

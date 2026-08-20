@@ -1,60 +1,131 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SearchBar from '../components/SearchBar';
+import FilterPanel from '../components/FilterPanel';
 import HomeworkCard from '../components/HomeworkCard';
 
 export default function HomeworkSearch() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [filters, setFilters] = useState({ subject: '', dueDate: '', status: '' });
+  const [homeworkList, setHomeworkList] = useState([]);
+  const [filteredHomework, setFilteredHomework] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
-  const homeworkItems = [
-    { id: 1, subject: 'Music', date: '19 May', icon: 'music_note', color: 'bg-[#FFEFED] text-[#B2292F]' },
-    { id: 2, subject: 'Math', date: '21 May', icon: 'functions', color: 'bg-[#EEF2FF] text-[#4900E5]' },
-    { id: 3, subject: 'History', date: '23 May', icon: 'history_edu', color: 'bg-[#FFF8E6] text-[#852F00]' },
-    { id: 4, subject: 'Physics', date: '25 May', icon: 'architecture', color: 'bg-[#E6FBF0] text-[#008545]' },
+  // Mock data
+  const mockHomework = [
+    { id: 1, subject: 'Math', dueDate: '19 May', icon: 'functions', color: '#EEF2FF' },
+    { id: 2, subject: 'Science', dueDate: '20 May', icon: 'science', color: '#E6FBF0' },
+    { id: 3, subject: 'History', dueDate: '21 May', icon: 'history_edu', color: '#FFF8E6' },
+    { id: 4, subject: 'Music', dueDate: '22 May', icon: 'music_note', color: '#FFEFED' },
+    { id: 5, subject: 'Math', dueDate: '23 May', icon: 'functions', color: '#EEF2FF' },
+    { id: 6, subject: 'Science', dueDate: '24 May', icon: 'science', color: '#E6FBF0' },
+    { id: 7, subject: 'History', dueDate: '25 May', icon: 'history_edu', color: '#FFF8E6' },
+    { id: 8, subject: 'Music', dueDate: '26 May', icon: 'music_note', color: '#FFEFED' },
   ];
 
-  const filteredHomework = homeworkItems.filter(item =>
-    item.subject.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  useEffect(() => {
+    setHomeworkList(mockHomework);
+  }, []);
+
+  useEffect(() => {
+    let results = [...homeworkList];
+
+    // Apply search filter
+    if (searchTerm) {
+      results = results.filter(item =>
+        item.subject.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Apply other filters
+    if (filters.subject) {
+      results = results.filter(item =>
+        item.subject.toLowerCase() === filters.subject.toLowerCase()
+      );
+    }
+
+    if (filters.dueDate) {
+      results = results.filter(item =>
+        new Date(item.dueDate) >= new Date(filters.dueDate)
+      );
+    }
+
+    if (filters.status) {
+      // In a real app, you would filter by status
+      // This is just a placeholder
+      results = results.filter(item =>
+        item.status === filters.status
+      );
+    }
+
+    setFilteredHomework(results);
+    setCurrentPage(1);
+  }, [searchTerm, filters, homeworkList]);
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredHomework.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredHomework.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-background">
-      <header className="bg-background dark:bg-background flex justify-between items-center px-container-margin py-4 w-full docked full-width top-0 z-40">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
-            <img
-              className="w-full h-full object-cover"
-              alt="Student profile"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjAvkq_L0tO8f6B9IJx1WZt_g5CY1G4ZbUphsQrJLQwCdsaEDxodeFdaXzywo1ol4wqlzknm9e0wNndF---xubA_AUEX2jtVb1bzb9zfnnAT0lPvfpt_qXrn-pkocgu5ZKO4aOOuIApV7f4FMaNkT9Gpgkq2makZjP40fA4kcZWybywGOtT11Xsh_KL5xjF4WX9XLkl6pd-zffBNBAUp-B50RDxJiNH__l_2AVBjrPsQaQuwnxL-G4VA"
-            />
-          </div>
-          <h1 className="font-headline-md-mobile text-headline-md-mobile font-bold text-primary dark:text-inverse-primary">Good morning, Student</h1>
-        </div>
-        <button className="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-95 transition-transform">
-          <span className="material-symbols-outlined">notifications</span>
-        </button>
-      </header>
+    <div className="px-container-margin mt-2">
+      <SearchBar onSearch={setSearchTerm} />
+      <FilterPanel onFilterChange={setFilters} />
 
-      <div className="px-container-margin mt-2">
-        <SearchBar onSearch={setSearchTerm} />
+      <div className="mt-6">
+        {currentItems.length > 0 ? (
+          <div className="grid grid-cols-2 gap-4">
+            {currentItems.map(item => (
+              <HomeworkCard
+                key={item.id}
+                subject={item.subject}
+                dueDate={item.dueDate}
+                icon={item.icon}
+                color={item.color}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-8">
+            <p className="text-on-surface-variant">No homework found matching your criteria.</p>
+          </div>
+        )}
       </div>
 
-      <section className="mt-8">
-        <div className="flex justify-between items-end px-container-margin mb-4">
-          <h2 className="font-heading-md text-heading-md text-on-background">Homework</h2>
-          <button className="font-label-sm text-label-sm text-primary font-semibold">See all</button>
-        </div>
-        <div className="grid grid-cols-2 gap-4 px-container-margin">
-          {filteredHomework.map(item => (
-            <HomeworkCard
-              key={item.id}
-              subject={item.subject}
-              date={item.date}
-              icon={item.icon}
-              color={item.color}
-            />
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="mx-1 p-2 rounded-full bg-surface-container-lowest disabled:opacity-50"
+          >
+            <span className="material-symbols-outlined">chevron_left</span>
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+            <button
+              key={page}
+              onClick={() => handlePageChange(page)}
+              className={`mx-1 p-2 rounded-full ${currentPage === page ? 'bg-primary text-on-primary' : 'bg-surface-container-lowest text-on-surface'}`}
+            >
+              {page}
+            </button>
           ))}
+
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="mx-1 p-2 rounded-full bg-surface-container-lowest disabled:opacity-50"
+          >
+            <span className="material-symbols-outlined">chevron_right</span>
+          </button>
         </div>
-      </section>
+      )}
     </div>
   );
 }
