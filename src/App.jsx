@@ -1,23 +1,21 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
-import BottomNav from './components/BottomNav.jsx'
-import Dashboard from './pages/Dashboard.jsx'
-import Homework from './pages/Homework.jsx'
-import Calendar from './pages/Calendar.jsx'
-import Profile from './pages/Profile.jsx'
-import TransactionDetail from './pages/TransactionDetail.jsx'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Screen1DashboardHome from './pages/Screen1DashboardHome';
+import Screen2HomeworkSearch from './pages/Screen2HomeworkSearch';
+import Screen3CalendarExamsSchedule from './pages/Screen3CalendarExamsSchedule';
+import DetailTransaksi from './pages/DetailTransaksi';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-background text-on-background pb-32">
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/homework" element={<Homework />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/transaction/:id" element={<TransactionDetail />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path='/' element={<Screen1DashboardHome />} />
+<Route path='/screen-1-dashboard-home' element={<Screen1DashboardHome />} />
+<Route path='/screen-2-homework-search' element={<Screen2HomeworkSearch />} />
+<Route path='/screen-3-calendar-exams-schedule' element={<Screen3CalendarExamsSchedule />} />
+<Route path='/detail-transaksi' element={<DetailTransaksi />} />
+        <Route path="*" element={<Screen1DashboardHome />} />
       </Routes>
-      <BottomNav />
-    </div>
-  )
+    </BrowserRouter>
+  );
 }
