@@ -1,0 +1,383 @@
+/* TopAppBar */
+.topAppBar {
+  background-color: #fef7ff;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 56px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #cac4d0;
+}
+
+.topAppBarTitle {
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 400;
+  color: #1c1b1f;
+}
+
+.topAppBarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.topAppBarButton:hover {
+  background-color: #e7e0ec;
+}
+
+.topAppBarButton:active {
+  transform: scale(0.95);
+}
+
+/* Main Content */
+.mainContent {
+  max-width: 672px;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Order Header */
+.orderHeader {
+  background-color: #f5f2f7;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.orderHeaderContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orderIdLabel {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: #49454f;
+}
+
+.orderId {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 400;
+  color: #1c1b1f;
+}
+
+.statusBadge {
+  padding: 4px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(98, 0, 238, 0.2);
+}
+
+.statusBadge.pending {
+  background-color: rgba(98, 0, 238, 0.1);
+  color: #6200ee;
+}
+
+.statusBadge.completed {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+.statusBadge.failed {
+  background-color: rgba(233, 30, 99, 0.1);
+  color: #e91e63;
+}
+
+/* Stepper */
+.stepperContainer {
+  position: relative;
+  padding-top: 16px;
+  padding-bottom: 8px;
+}
+
+.stepperLine {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #cac4d0;
+  z-index: 0;
+}
+
+.stepperItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.stepperCircle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.stepperCircle.completed {
+  background-color: #6200ee;
+}
+
+.stepperCircle.active {
+  background-color: #6200ee;
+  box-shadow: 0 0 0 8px rgba(98, 0, 238, 0.2);
+}
+
+.stepperCircle.pending {
+  background-color: #cac4d0;
+}
+
+.stepperLabel {
+  font-size: 10px;
+  line-height: 12px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.stepperLabel.completed {
+  color: #49454f;
+}
+
+.stepperLabel.active {
+  color: #6200ee;
+  font-weight: 700;
+}
+
+.stepperLabel.pending {
+  color: #49454f;
+}
+
+/* Item List */
+.itemListTitle {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #49454f;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.itemCard {
+  background-color: #f5f2f7;
+  padding: 8px;
+  padding-right: 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ffffff;
+}
+
+.itemImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  background-color: #e7e0ec;
+}
+
+.itemDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itemName {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #1c1b1f;
+}
+
+.itemPrice {
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 400;
+  color: #6200ee;
+}
+
+.itemStatus {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #388e3c;
+}
+
+.itemStatusText {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+/* Cost Breakdown */
+.costBreakdown {
+  background-color: #f5f2f7;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ffffff;
+}
+
+.costBreakdownContent {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.costItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 20px;
+  color: #49454f;
+}
+
+.totalPayment {
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px dashed #cac4d0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.totalLabel {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #1c1b1f;
+}
+
+.totalAmount {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 400;
+  color: #6200ee;
+}
+
+/* Invoice Section */
+.invoiceSection {
+  background-color: rgba(203, 226, 255, 0.05);
+  border: 1px solid #cac4d0;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.invoiceHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoiceTitle {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #1c1b1f;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.printButton {
+  background-color: #e7e0ec;
+  color: #6200ee;
+}
+
+.printButton:hover {
+  background-color: #d0bcff;
+}
+
+.downloadButton {
+  background-color: #e7e0ec;
+  color: #6200ee;
+}
+
+.downloadButton:hover {
+  background-color: #d0bcff;
+}
+
+.invoiceDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.invoiceRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.invoiceLabel {
+  font-size: 14px;
+  line-height: 20px;
+  color: #49454f;
+}
+
+.invoiceValue {
+  font-size: 14px;
+  line-height: 20px;
+  color: #1c1b1f;
+}
+
+/* Responsive */
+@media (min-width: 640px) {
+  .topAppBar {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .mainContent {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}

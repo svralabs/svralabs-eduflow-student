@@ -1,0 +1,136 @@
+{
+  "project_name": "svralabs-eduflow-student",
+  "architecture_summary": "Modular React SPA. Pages in src/pages/. Shared components in src/components/. Routing via React Router. State: local component state + context for auth/user. Styling: CSS modules. API calls: fetch wrapper. No Redux (YAGNI).",
+  "tickets": [
+    {
+      "id": "TASK-001",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "Build Dashboard Home page (screen_1_dashboard_home)",
+      "source_screen": "screen_1_dashboard_home",
+      "description": "Convert Stitch HTML to React component. Extract reusable widgets (announcements, quick actions, progress cards). Keep layout exact. Use CSS modules for styling. Mock data for now. API integration later.",
+      "target_files": [
+        "src/pages/DashboardHome.jsx",
+        "src/components/AnnouncementCard.jsx",
+        "src/components/ProgressCard.jsx",
+        "src/pages/DashboardHome.module.css"
+      ],
+      "acceptance_criteria": [
+        "Pixel-perfect match to Stitch screen",
+        "Responsive (mobile/desktop)",
+        "No hardcoded text (use i18n keys)",
+        "Mock data in separate file (src/mocks/dashboardHome.js)",
+        "Component self-contained (no external state)"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-002",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "Build Homework Search page (screen_2_homework_search)",
+      "source_screen": "screen_2_homework_search",
+      "description": "Convert Stitch HTML to React. Implement search bar, filters, results list. Use controlled components for form inputs. Debounce search input. Mock data for results.",
+      "target_files": [
+        "src/pages/HomeworkSearch.jsx",
+        "src/pages/HomeworkSearch.module.css",
+        "src/mocks/homeworkSearch.js"
+      ],
+      "acceptance_criteria": [
+        "Exact visual match to Stitch screen",
+        "Search input debounced (300ms)",
+        "Filters work (status, subject, date range)",
+        "Results sort/filter client-side (mock data)",
+        "Empty state shown when no results"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-003",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "Build Calendar & Exams Schedule page (screen_3_calendar_exams_schedule)",
+      "source_screen": "screen_3_calendar_exams_schedule",
+      "description": "Convert Stitch HTML to React. Implement calendar view (use react-big-calendar or similar if already installed, else native HTML/CSS). Show exams as events. Mock data for events.",
+      "target_files": [
+        "src/pages/CalendarExams.jsx",
+        "src/pages/CalendarExams.module.css",
+        "src/mocks/calendarEvents.js"
+      ],
+      "acceptance_criteria": [
+        "Exact visual match to Stitch screen",
+        "Calendar shows current month by default",
+        "Exams appear as events with correct date/time",
+        "Click event shows exam details (modal or inline)",
+        "Responsive (mobile: list view, desktop: calendar grid)"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-004",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "Build Transaction Detail page (detail_transaksi)",
+      "source_screen": "detail_transaksi",
+      "description": "Convert Stitch HTML to React. Show transaction details (amount, date, items, status). Mock data for now. Add print/download button (UI only, no actual functionality).",
+      "target_files": [
+        "src/pages/TransactionDetail.jsx",
+        "src/pages/TransactionDetail.module.css",
+        "src/mocks/transactionDetail.js"
+      ],
+      "acceptance_criteria": [
+        "Exact visual match to Stitch screen",
+        "Transaction status color-coded (success/warning/error)",
+        "Print/download buttons present (UI only)",
+        "Responsive layout (stacked on mobile)",
+        "No hardcoded text (i18n keys)"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-005",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "Create shared layout components (Header, Sidebar, Footer)",
+      "source_screen": "",
+      "description": "Extract common layout elements from Stitch screens. Build Header (logo, user menu), Sidebar (navigation), Footer. Use CSS modules. Make responsive (sidebar collapses on mobile).",
+      "target_files": [
+        "src/components/Header.jsx",
+        "src/components/Sidebar.jsx",
+        "src/components/Footer.jsx",
+        "src/components/Layout.module.css"
+      ],
+      "acceptance_criteria": [
+        "Consistent with all Stitch screens",
+        "Sidebar collapses on mobile (hamburger menu)",
+        "Active route highlighted in sidebar",
+        "User menu shows name/avatar (mock data)",
+        "Footer links present (UI only)"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-006",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "Set up routing and app shell (src/App.jsx)",
+      "source_screen": "",
+      "description": "Configure React Router. Create routes for all pages (DashboardHome, HomeworkSearch, CalendarExams, TransactionDetail). Add 404 page. Wrap app in Layout component. Set up error boundary.",
+      "target_files": [
+        "src/App.jsx",
+        "src/pages/NotFound.jsx",
+        "src/components/ErrorBoundary.jsx"
+      ],
+      "acceptance_criteria": [
+        "All routes work (direct navigation, refresh)",
+        "404 page shown for unknown routes",
+        "Layout component wraps all pages",
+        "Error boundary catches rendering errors (shows fallback UI)",
+        "Router uses lazy loading for pages (ponytail: skip for now, add when bundle size > 200KB)"
+      ],
+      "status": "DONE"
+    }
+  ],
+  "status": "IN_PROGRESS",
+  "updated_at": "2026-08-20 11:29:53"
+}
