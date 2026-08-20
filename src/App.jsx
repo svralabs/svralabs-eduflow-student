@@ -4,20 +4,16 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ErrorBoundary from './components/ErrorBoundary';
-import DashboardHome from './pages/DashboardHome';
 import HomeworkSearch from './pages/HomeworkSearch';
 import CalendarExams from './pages/CalendarExams';
 import TransactionDetail from './pages/TransactionDetail';
-import ServerError from './pages/ServerError';
 
 function ScreenBar() {
   const loc = useLocation();
   const navs = [
-    { path: '/', label: 'DashboardHome' },
-    { path: '/homeworksearch', label: 'HomeworkSearch' },
+    { path: '/', label: 'HomeworkSearch' },
     { path: '/calendarexams', label: 'CalendarExams' },
-    { path: '/transactiondetail', label: 'TransactionDetail' },
-    { path: '/servererror', label: 'ServerError' }
+    { path: '/transactiondetail', label: 'TransactionDetail' }
   ];
 
   return (
@@ -53,12 +49,10 @@ export default function App() {
               <ScreenBar />
               <div className="pt-10 min-h-screen">
                 <Routes>
-                  <Route path='/' element={<DashboardHome />} />
-        <Route path='/homeworksearch' element={<HomeworkSearch />} />
+                  <Route path='/' element={<HomeworkSearch />} />
         <Route path='/calendarexams' element={<CalendarExams />} />
         <Route path='/transactiondetail' element={<TransactionDetail />} />
-        <Route path='/servererror' element={<ServerError />} />
-                  <Route path="*" element={<DashboardHome />} />
+                  <Route path="*" element={<HomeworkSearch />} />
                 </Routes>
               </div>
             </BrowserRouter>

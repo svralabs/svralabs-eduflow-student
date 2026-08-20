@@ -1,24 +1,25 @@
 {
   "project_name": "svralabs-eduflow-student",
-  "architecture_summary": "Modular React SPA. Pages in src/pages/. Shared components in src/components/. Tailwind CSS for styling. React Router v6 for navigation. No state management lib (use React context for global state).",
+  "architecture_summary": "Modular React SPA. Pages in src/pages/. Shared components in src/components/. React Router v6 for navigation. Tailwind CSS for styling. No state management library (use React context for global state if needed).",
   "tickets": [
     {
       "id": "TASK-001",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Convert Stitch dashboard home screen to React page",
+      "title": "Build Dashboard Home page (screen_1_dashboard_home)",
       "source_screen": "screen_1_dashboard_home",
-      "description": "Create src/pages/DashboardHome.jsx. Replicate exact layout, colors, typography from Stitch HTML. Use Tailwind classes. Extract reusable components (e.g., Card, ProgressBar) to src/components/. Hardcode mock data for now. Ensure responsive.",
+      "description": "Convert Stitch HTML to React component. Extract reusable widgets (announcements, upcoming tasks, quick actions) into separate components. Use Tailwind for styling. Preserve all visual fidelity.",
       "target_files": [
         "src/pages/DashboardHome.jsx",
-        "src/components/Card.jsx",
-        "src/components/ProgressBar.jsx"
+        "src/components/AnnouncementCard.jsx",
+        "src/components/UpcomingTaskList.jsx",
+        "src/components/QuickActionButton.jsx"
       ],
       "acceptance_criteria": [
-        "Pixel-perfect match to Stitch screen_1_dashboard_home",
-        "Responsive down to 320px width",
-        "No console errors",
-        "Reusable Card and ProgressBar components extracted"
+        "Pixel-perfect match to Stitch design",
+        "All interactive elements (buttons, links) functional",
+        "Responsive behavior preserved",
+        "No console errors"
       ],
       "status": "DONE"
     },
@@ -26,18 +27,18 @@
       "id": "TASK-002",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Convert Stitch homework search screen to React page",
+      "title": "Build Homework Search page (screen_2_homework_search)",
       "source_screen": "screen_2_homework_search",
-      "description": "Create src/pages/HomeworkSearch.jsx. Replicate search bar, filters, results list. Use Tailwind. Extract SearchBar and HomeworkCard components. Hardcode mock data. Add client-side search/filter logic (case-insensitive, partial match).",
+      "description": "Convert Stitch HTML to React component. Implement search functionality (client-side filter). Extract search bar and homework card components. Preserve all visual fidelity.",
       "target_files": [
         "src/pages/HomeworkSearch.jsx",
         "src/components/SearchBar.jsx",
         "src/components/HomeworkCard.jsx"
       ],
       "acceptance_criteria": [
-        "Exact visual match to Stitch screen_2_homework_search",
-        "Search and filter work with mock data",
-        "Responsive layout",
+        "Pixel-perfect match to Stitch design",
+        "Search filters work (subject, due date, status)",
+        "Results update in real-time",
         "No console errors"
       ],
       "status": "DONE"
@@ -46,18 +47,18 @@
       "id": "TASK-003",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Convert Stitch calendar exams schedule screen to React page",
+      "title": "Build Calendar & Exams Schedule page (screen_3_calendar_exams_schedule)",
       "source_screen": "screen_3_calendar_exams_schedule",
-      "description": "Create src/pages/CalendarExams.jsx. Replicate calendar grid, exam cards, month navigation. Use Tailwind. Extract CalendarGrid and ExamCard components. Hardcode mock exam data. Add month navigation (prev/next buttons).",
+      "description": "Convert Stitch HTML to React component. Implement calendar view (use react-big-calendar or native solution if simpler). Extract exam card component. Preserve all visual fidelity.",
       "target_files": [
         "src/pages/CalendarExams.jsx",
-        "src/components/CalendarGrid.jsx",
         "src/components/ExamCard.jsx"
       ],
       "acceptance_criteria": [
-        "Pixel-perfect match to Stitch screen_3_calendar_exams_schedule",
+        "Pixel-perfect match to Stitch design",
+        "Calendar displays current month by default",
+        "Exams marked on correct dates",
         "Month navigation works",
-        "Responsive",
         "No console errors"
       ],
       "status": "DONE"
@@ -66,18 +67,17 @@
       "id": "TASK-004",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Convert Stitch transaction detail screen to React page",
+      "title": "Build Transaction Detail page (detail_transaksi)",
       "source_screen": "detail_transaksi",
-      "description": "Create src/pages/TransactionDetail.jsx. Replicate transaction header, timeline, payment breakdown. Use Tailwind. Extract Timeline and PaymentBreakdown components. Hardcode mock data. Add print button (opens print dialog).",
+      "description": "Convert Stitch HTML to React component. Extract transaction item component. Preserve all visual fidelity. Add back button functionality.",
       "target_files": [
         "src/pages/TransactionDetail.jsx",
-        "src/components/Timeline.jsx",
-        "src/components/PaymentBreakdown.jsx"
+        "src/components/TransactionItem.jsx"
       ],
       "acceptance_criteria": [
-        "Exact visual match to Stitch detail_transaksi",
-        "Print button triggers browser print dialog",
-        "Responsive",
+        "Pixel-perfect match to Stitch design",
+        "All transaction details displayed correctly",
+        "Back button returns to previous page",
         "No console errors"
       ],
       "status": "DONE"
@@ -86,19 +86,18 @@
       "id": "TASK-005",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Create shared layout and navigation components",
+      "title": "Create shared layout components (Header, Sidebar, Footer)",
       "source_screen": "",
-      "description": "Create src/components/Layout.jsx (header, sidebar, main content). Create src/components/Navbar.jsx (top navigation). Extract common UI elements (Logo, UserDropdown) to src/components/. Use Tailwind. Ensure sidebar collapsible on mobile.",
+      "description": "Extract common layout elements from all screens. Build responsive header with user menu. Build collapsible sidebar with navigation. Build footer with copyright info.",
       "target_files": [
-        "src/components/Layout.jsx",
-        "src/components/Navbar.jsx",
-        "src/components/Logo.jsx",
-        "src/components/UserDropdown.jsx"
+        "src/components/Header.jsx",
+        "src/components/Sidebar.jsx",
+        "src/components/Footer.jsx"
       ],
       "acceptance_criteria": [
-        "Consistent layout across all pages",
-        "Sidebar collapses on mobile (hamburger menu)",
-        "Active route highlighted in navbar",
+        "Consistent across all pages",
+        "Sidebar collapses on small screens",
+        "Active route highlighted in navigation",
         "No console errors"
       ],
       "status": "DONE"
@@ -107,63 +106,23 @@
       "id": "TASK-006",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Set up React Router and global state",
+      "title": "Implement routing and app shell (src/App.jsx)",
       "source_screen": "",
-      "description": "Create src/App.jsx. Configure React Router v6 routes for all pages. Add global state context (src/context/AppContext.jsx) for user auth and theme. Wrap app with context providers. Add 404 page (src/pages/NotFound.jsx).",
+      "description": "Set up React Router v6. Configure routes for all pages. Implement layout with header, sidebar, main content area. Add 404 page. Ensure navigation works between all screens.",
       "target_files": [
         "src/App.jsx",
-        "src/context/AppContext.jsx",
         "src/pages/NotFound.jsx"
       ],
       "acceptance_criteria": [
-        "All routes load correct page component",
-        "Global state accessible via useContext",
-        "404 page shows for unknown routes",
-        "No console errors"
-      ],
-      "status": "DONE"
-    },
-    {
-      "id": "TASK-007",
-      "role": "frontend",
-      "model": "hermes-auto",
-      "title": "Add error boundaries and loading states",
-      "source_screen": "",
-      "description": "Create src/components/ErrorBoundary.jsx. Wrap all page components with ErrorBoundary. Add loading skeletons (src/components/Skeleton.jsx) for async data. Add 500 error page (src/pages/ServerError.jsx).",
-      "target_files": [
-        "src/components/ErrorBoundary.jsx",
-        "src/components/Skeleton.jsx",
-        "src/pages/ServerError.jsx"
-      ],
-      "acceptance_criteria": [
-        "ErrorBoundary catches errors in child components",
-        "Loading skeletons show during async operations",
-        "500 page renders on uncaught errors",
-        "No console errors"
-      ],
-      "status": "DONE"
-    },
-    {
-      "id": "TASK-008",
-      "role": "frontend",
-      "model": "hermes-auto",
-      "title": "App shell, navigation bar, and router wiring (src/App.jsx)",
-      "source_screen": "",
-      "description": "Finalize src/App.jsx. Integrate Layout, Navbar, Router. Add route-based code splitting (React.lazy). Set up base Tailwind config (src/tailwind.config.js) with project colors. Add global CSS reset (src/index.css).",
-      "target_files": [
-        "src/App.jsx",
-        "src/tailwind.config.js",
-        "src/index.css"
-      ],
-      "acceptance_criteria": [
-        "All pages render within Layout component",
-        "Code splitting works (check network tab)",
-        "Tailwind config matches Stitch design tokens",
+        "All routes load correct components",
+        "Navigation between pages works",
+        "404 page displays for unknown routes",
+        "Layout consistent across all pages",
         "No console errors"
       ],
       "status": "DONE"
     }
   ],
   "status": "IN_PROGRESS",
-  "updated_at": "2026-08-20 15:12:42"
+  "updated_at": "2026-08-20 17:13:03"
 }

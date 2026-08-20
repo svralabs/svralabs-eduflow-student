@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleChange = (e) => {
+  const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     onSearch(e.target.value);
   };
@@ -17,7 +17,7 @@ export default function SearchBar({ onSearch }) {
           placeholder="Search"
           type="text"
           value={searchTerm}
-          onChange={handleChange}
+          onChange={handleSearch}
         />
       </div>
       <button className="bg-primary text-on-primary p-2.5 rounded-full flex items-center justify-center active:scale-90 transition-transform">
