@@ -1,26 +1,26 @@
 {
   "project_name": "svralabs-eduflow-student",
-  "architecture_summary": "Modular React SPA. Pages in src/pages/. Shared components in src/components/. Routing via React Router. State: local component state + context for auth/user. Styling: CSS modules. API calls: fetch wrapper. No Redux (YAGNI).",
+  "architecture_summary": "Modular React SPA. Pages in src/pages/. Shared components in src/components/. React Router v6 for navigation. Tailwind CSS for styling. No state management library (use React context for global state if needed).",
   "tickets": [
     {
       "id": "TASK-001",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Build Dashboard Home page (screen_1_dashboard_home)",
+      "title": "Dashboard home page (screen_1_dashboard_home)",
       "source_screen": "screen_1_dashboard_home",
-      "description": "Convert Stitch HTML to React component. Extract reusable widgets (announcements, quick actions, progress cards). Keep layout exact. Use CSS modules for styling. Mock data for now. API integration later.",
+      "description": "Convert Stitch screen_1_dashboard_home to React component. Extract reusable widgets (announcements, upcoming deadlines, quick actions) into separate components. Preserve exact layout, colors, spacing. Use Tailwind classes. No hardcoded data - fetch from API endpoints: /api/dashboard/summary, /api/announcements.",
       "target_files": [
         "src/pages/DashboardHome.jsx",
         "src/components/AnnouncementCard.jsx",
-        "src/components/ProgressCard.jsx",
-        "src/pages/DashboardHome.module.css"
+        "src/components/UpcomingDeadlineCard.jsx",
+        "src/components/QuickActionButton.jsx"
       ],
       "acceptance_criteria": [
-        "Pixel-perfect match to Stitch screen",
-        "Responsive (mobile/desktop)",
-        "No hardcoded text (use i18n keys)",
-        "Mock data in separate file (src/mocks/dashboardHome.js)",
-        "Component self-contained (no external state)"
+        "Component renders pixel-perfect match to Stitch screen",
+        "Data fetched from API endpoints on mount",
+        "Loading states for async data",
+        "Error handling for failed API calls",
+        "Responsive design matches Stitch breakpoints"
       ],
       "status": "DONE"
     },
@@ -28,20 +28,21 @@
       "id": "TASK-002",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Build Homework Search page (screen_2_homework_search)",
+      "title": "Homework search page (screen_2_homework_search)",
       "source_screen": "screen_2_homework_search",
-      "description": "Convert Stitch HTML to React. Implement search bar, filters, results list. Use controlled components for form inputs. Debounce search input. Mock data for results.",
+      "description": "Convert Stitch screen_2_homework_search to React component. Implement search bar with filters (subject, due date range, status). Table display for results. Pagination controls. Extract search form and table row components. API endpoints: /api/homework/search (POST with filters), /api/homework/{id} for details.",
       "target_files": [
         "src/pages/HomeworkSearch.jsx",
-        "src/pages/HomeworkSearch.module.css",
-        "src/mocks/homeworkSearch.js"
+        "src/components/HomeworkSearchForm.jsx",
+        "src/components/HomeworkTableRow.jsx"
       ],
       "acceptance_criteria": [
-        "Exact visual match to Stitch screen",
-        "Search input debounced (300ms)",
-        "Filters work (status, subject, date range)",
-        "Results sort/filter client-side (mock data)",
-        "Empty state shown when no results"
+        "Pixel-perfect match to Stitch design",
+        "Search filters work with API integration",
+        "Table updates with search results",
+        "Pagination controls functional",
+        "Loading states during API calls",
+        "Error handling for failed requests"
       ],
       "status": "DONE"
     },
@@ -49,20 +50,21 @@
       "id": "TASK-003",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Build Calendar & Exams Schedule page (screen_3_calendar_exams_schedule)",
+      "title": "Calendar & exams schedule page (screen_3_calendar_exams_schedule)",
       "source_screen": "screen_3_calendar_exams_schedule",
-      "description": "Convert Stitch HTML to React. Implement calendar view (use react-big-calendar or similar if already installed, else native HTML/CSS). Show exams as events. Mock data for events.",
+      "description": "Convert Stitch screen_3_calendar_exams_schedule to React component. Implement interactive calendar with exam/event markers. Month/week/day views. Event detail modal. Extract calendar component and event card. API endpoints: /api/calendar/events (GET with date range), /api/exams/schedule.",
       "target_files": [
         "src/pages/CalendarExams.jsx",
-        "src/pages/CalendarExams.module.css",
-        "src/mocks/calendarEvents.js"
+        "src/components/CalendarView.jsx",
+        "src/components/EventDetailModal.jsx"
       ],
       "acceptance_criteria": [
-        "Exact visual match to Stitch screen",
-        "Calendar shows current month by default",
-        "Exams appear as events with correct date/time",
-        "Click event shows exam details (modal or inline)",
-        "Responsive (mobile: list view, desktop: calendar grid)"
+        "Pixel-perfect match to Stitch design",
+        "Calendar navigation between views",
+        "Events fetched and displayed for selected date range",
+        "Event detail modal opens on click",
+        "Responsive design for all breakpoints",
+        "Loading states and error handling"
       ],
       "status": "DONE"
     },
@@ -70,20 +72,19 @@
       "id": "TASK-004",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Build Transaction Detail page (detail_transaksi)",
+      "title": "Transaction detail page (detail_transaksi)",
       "source_screen": "detail_transaksi",
-      "description": "Convert Stitch HTML to React. Show transaction details (amount, date, items, status). Mock data for now. Add print/download button (UI only, no actual functionality).",
+      "description": "Convert Stitch detail_transaksi screen to React component. Display transaction details, payment status, receipt download. Extract transaction item component. API endpoint: /api/transactions/{id}.",
       "target_files": [
         "src/pages/TransactionDetail.jsx",
-        "src/pages/TransactionDetail.module.css",
-        "src/mocks/transactionDetail.js"
+        "src/components/TransactionItem.jsx"
       ],
       "acceptance_criteria": [
-        "Exact visual match to Stitch screen",
-        "Transaction status color-coded (success/warning/error)",
-        "Print/download buttons present (UI only)",
-        "Responsive layout (stacked on mobile)",
-        "No hardcoded text (i18n keys)"
+        "Pixel-perfect match to Stitch design",
+        "Transaction data fetched from API",
+        "Receipt download functionality",
+        "Status indicators match design",
+        "Error handling for failed API call"
       ],
       "status": "DONE"
     },
@@ -91,21 +92,23 @@
       "id": "TASK-005",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Create shared layout components (Header, Sidebar, Footer)",
+      "title": "Shared UI components library",
       "source_screen": "",
-      "description": "Extract common layout elements from Stitch screens. Build Header (logo, user menu), Sidebar (navigation), Footer. Use CSS modules. Make responsive (sidebar collapses on mobile).",
+      "description": "Create shared components used across multiple pages. Extract from existing screens: buttons, cards, modals, form inputs, badges, icons. Style with Tailwind. Document props in JSDoc. No business logic - pure presentational components.",
       "target_files": [
-        "src/components/Header.jsx",
-        "src/components/Sidebar.jsx",
-        "src/components/Footer.jsx",
-        "src/components/Layout.module.css"
+        "src/components/Button.jsx",
+        "src/components/Card.jsx",
+        "src/components/Modal.jsx",
+        "src/components/Input.jsx",
+        "src/components/Badge.jsx",
+        "src/components/Icon.jsx"
       ],
       "acceptance_criteria": [
-        "Consistent with all Stitch screens",
-        "Sidebar collapses on mobile (hamburger menu)",
-        "Active route highlighted in sidebar",
-        "User menu shows name/avatar (mock data)",
-        "Footer links present (UI only)"
+        "Components match Stitch design system",
+        "Consistent styling across all components",
+        "Props documented with JSDoc",
+        "Components reusable across all pages",
+        "Storybook stories for each component (optional, add if time permits)"
       ],
       "status": "DONE"
     },
@@ -113,24 +116,65 @@
       "id": "TASK-006",
       "role": "frontend",
       "model": "hermes-auto",
-      "title": "Set up routing and app shell (src/App.jsx)",
+      "title": "API service layer",
       "source_screen": "",
-      "description": "Configure React Router. Create routes for all pages (DashboardHome, HomeworkSearch, CalendarExams, TransactionDetail). Add 404 page. Wrap app in Layout component. Set up error boundary.",
+      "description": "Create API service layer. Centralize API calls, error handling, auth token management. Use fetch API (no axios). Base URL from environment variable. Implement request/response interceptors for auth token injection and error handling.",
       "target_files": [
-        "src/App.jsx",
-        "src/pages/NotFound.jsx",
-        "src/components/ErrorBoundary.jsx"
+        "src/services/api.js"
       ],
       "acceptance_criteria": [
-        "All routes work (direct navigation, refresh)",
-        "404 page shown for unknown routes",
-        "Layout component wraps all pages",
-        "Error boundary catches rendering errors (shows fallback UI)",
-        "Router uses lazy loading for pages (ponytail: skip for now, add when bundle size > 200KB)"
+        "All API endpoints centralized",
+        "Auth token automatically injected",
+        "Error handling for 4xx/5xx responses",
+        "Request/response interceptors working",
+        "Environment variable for base URL"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-007",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "Global state management (React context)",
+      "source_screen": "",
+      "description": "Implement global state management for user auth, theme, notifications. Use React context. Create providers for auth, theme, notification. No Redux - overkill for current scope.",
+      "target_files": [
+        "src/context/AuthContext.jsx",
+        "src/context/ThemeContext.jsx",
+        "src/context/NotificationContext.jsx"
+      ],
+      "acceptance_criteria": [
+        "Auth state accessible across app",
+        "Theme switching works",
+        "Notifications displayed globally",
+        "Context providers wrap app at root level"
+      ],
+      "status": "DONE"
+    },
+    {
+      "id": "TASK-008",
+      "role": "frontend",
+      "model": "hermes-auto",
+      "title": "App shell, navigation bar, and router wiring (src/App.jsx)",
+      "source_screen": "",
+      "description": "Create app shell. Implement navigation bar with active state. Set up React Router v6 routes. Lazy load page components. Error boundary at root. Global styles and Tailwind config. Environment variables for API base URL.",
+      "target_files": [
+        "src/App.jsx",
+        "src/routes.jsx",
+        "src/styles/global.css",
+        "tailwind.config.js"
+      ],
+      "acceptance_criteria": [
+        "All pages accessible via navigation",
+        "Active state in nav bar",
+        "Lazy loading for page components",
+        "Error boundary catches rendering errors",
+        "Global styles match design system",
+        "Tailwind config includes all design tokens"
       ],
       "status": "DONE"
     }
   ],
   "status": "IN_PROGRESS",
-  "updated_at": "2026-08-20 11:29:53"
+  "updated_at": "2026-08-20 13:27:47"
 }

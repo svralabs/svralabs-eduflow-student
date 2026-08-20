@@ -1,10 +1,48 @@
-import React from 'react';
-export default function Card({ children, className = '', title, subtitle, ...props }) {
+import PropTypes from 'prop-types';
+
+/**
+ * Card component with Stitch design system styling
+ * @param {Object} props - Component props
+ * @param {string} [props.title] - Card title
+ * @param {string} [props.subtitle] - Card subtitle
+ * @param {string} [props.children] - Card content
+ * @param {string} [props.className] - Additional class names
+ * @param {string} [props.variant='default'] - Card variant: 'default', 'elevated', 'outlined'
+ * @returns {JSX.Element} Card component
+ */
+export default function Card({
+  title,
+  subtitle,
+  children,
+  className = '',
+  variant = 'default',
+}) {
+  const baseClasses = 'rounded-lg p-6';
+  const variantClasses = {
+    default: 'bg-white',
+    elevated: 'bg-white shadow-md',
+    outlined: 'bg-white border border-gray-200',
+  };
+
+  const classes = `${baseClasses} ${variantClasses[variant]} ${className}`;
+
   return (
-    <div className={`bg-white dark:bg-[#1e1e24] rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-800 ${className}`} {...props}>
-      {title && <h3 className="font-bold text-lg text-slate-800 dark:text-white mb-1">{title}</h3>}
-      {subtitle && <p className="text-sm text-slate-500 mb-4">{subtitle}</p>}
+    <div className={classes}>
+      {title && (
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+          {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
+        </div>
+      )}
       {children}
     </div>
   );
 }
+
+Card.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  variant: PropTypes.oneOf(['default', 'elevated', 'outlined']),
+};
