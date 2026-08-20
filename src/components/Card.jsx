@@ -1,48 +1,27 @@
-import PropTypes from 'prop-types';
+import React from 'react';
+import ProgressBar from './ProgressBar';
 
-/**
- * Card component with Stitch design system styling
- * @param {Object} props - Component props
- * @param {string} [props.title] - Card title
- * @param {string} [props.subtitle] - Card subtitle
- * @param {string} [props.children] - Card content
- * @param {string} [props.className] - Additional class names
- * @param {string} [props.variant='default'] - Card variant: 'default', 'elevated', 'outlined'
- * @returns {JSX.Element} Card component
- */
-export default function Card({
-  title,
-  subtitle,
-  children,
-  className = '',
-  variant = 'default',
-}) {
-  const baseClasses = 'rounded-lg p-6';
-  const variantClasses = {
-    default: 'bg-white',
-    elevated: 'bg-white shadow-md',
-    outlined: 'bg-white border border-gray-200',
-  };
-
-  const classes = `${baseClasses} ${variantClasses[variant]} ${className}`;
-
+export default function Card({ subject, teacher, progress, color, icon, teacherImage }) {
   return (
-    <div className={classes}>
-      {title && (
-        <div className="mb-4">
-          <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-          {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
+    <div className={`bg-${color} rounded-3xl p-card-padding flex flex-col justify-between aspect-[4/5] relative overflow-hidden group active:scale-[0.98] transition-transform`}>
+      <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors"></div>
+      <div className="flex justify-between items-start">
+        <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+          <span className="material-symbols-outlined text-white">{icon}</span>
         </div>
-      )}
-      {children}
+      </div>
+      <div>
+        <h3 className="text-white font-headline-md text-headline-md mb-1">{subject}</h3>
+        <p className={`text-on-${color}-variant text-label-sm font-label-sm opacity-90`}>Teacher: {teacher}</p>
+        <div className="mt-4 w-8 h-8 rounded-full overflow-hidden border border-white/30">
+          <img className="w-full h-full object-cover" src={teacherImage} alt={`Teacher ${teacher}`} />
+        </div>
+        {progress && (
+          <div className="mt-4">
+            <ProgressBar progress={progress} color={`bg-${color}`} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
-
-Card.propTypes = {
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
-  children: PropTypes.node,
-  className: PropTypes.string,
-  variant: PropTypes.oneOf(['default', 'elevated', 'outlined']),
-};

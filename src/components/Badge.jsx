@@ -1,45 +1,10 @@
-import PropTypes from 'prop-types';
-
-/**
- * Badge component with Stitch design system styling
- * @param {Object} props - Component props
- * @param {string} props.children - Badge text
- * @param {string} [props.variant='default'] - Badge variant: 'default', 'success', 'warning', 'danger'
- * @param {string} [props.size='medium'] - Badge size: 'small', 'medium', 'large'
- * @param {string} [props.className] - Additional class names
- * @returns {JSX.Element} Badge component
- */
-export default function Badge({
-  children,
-  variant = 'default',
-  size = 'medium',
-  className = '',
-}) {
-  const baseClasses = 'inline-flex items-center rounded-full font-medium';
-  const variantClasses = {
-    default: 'bg-gray-100 text-gray-800',
-    success: 'bg-green-100 text-green-800',
-    warning: 'bg-yellow-100 text-yellow-800',
-    danger: 'bg-red-100 text-red-800',
+import React from 'react';
+export default function Badge({ children, variant = 'default', className = '' }) {
+  const variants = {
+    default: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300",
+    success: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300",
+    warning: "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300",
+    primary: "bg-primary/10 text-primary dark:text-primary-fixed"
   };
-  const sizeClasses = {
-    small: 'px-2.5 py-0.5 text-xs',
-    medium: 'px-3 py-0.5 text-sm',
-    large: 'px-4 py-1 text-base',
-  };
-
-  const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
-
-  return (
-    <span className={classes}>
-      {children}
-    </span>
-  );
+  return <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${variants[variant] || variants.default} ${className}`}>{children}</span>;
 }
-
-Badge.propTypes = {
-  children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(['default', 'success', 'warning', 'danger']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  className: PropTypes.string,
-};

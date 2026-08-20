@@ -8,6 +8,7 @@ import DashboardHome from './pages/DashboardHome';
 import HomeworkSearch from './pages/HomeworkSearch';
 import CalendarExams from './pages/CalendarExams';
 import TransactionDetail from './pages/TransactionDetail';
+import ServerError from './pages/ServerError';
 
 function ScreenBar() {
   const loc = useLocation();
@@ -15,7 +16,8 @@ function ScreenBar() {
     { path: '/', label: 'DashboardHome' },
     { path: '/homeworksearch', label: 'HomeworkSearch' },
     { path: '/calendarexams', label: 'CalendarExams' },
-    { path: '/transactiondetail', label: 'TransactionDetail' }
+    { path: '/transactiondetail', label: 'TransactionDetail' },
+    { path: '/servererror', label: 'ServerError' }
   ];
 
   return (
@@ -55,6 +57,7 @@ export default function App() {
         <Route path='/homeworksearch' element={<HomeworkSearch />} />
         <Route path='/calendarexams' element={<CalendarExams />} />
         <Route path='/transactiondetail' element={<TransactionDetail />} />
+        <Route path='/servererror' element={<ServerError />} />
                   <Route path="*" element={<DashboardHome />} />
                 </Routes>
               </div>

@@ -1,44 +1,42 @@
-import { useState, useEffect } from 'react';
-import AnnouncementCard from '../components/AnnouncementCard';
-import UpcomingDeadlineCard from '../components/UpcomingDeadlineCard';
-import QuickActionButton from '../components/QuickActionButton';
+import React from 'react';
+import Card from '../components/Card';
+
+const subjects = [
+  {
+    subject: 'Culture',
+    teacher: 'Dianne Russell',
+    color: 'primary-container',
+    icon: 'star',
+    teacherImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBGDpMQgF7UzYJxe16SDU3ReifMBnxRe0lsEqxwu6NZkCn-z4atIUN8eWV9p0T3-SIx2q9J5mnA08V1U1XTrtT4B9ALceueYjzcnj6oovWIqEOrJWcHtMAveor-FlfVwyXPTnMqNC1ITTKyVMBacwG6DCJKxfZs4-VLZdry2Lyr0VQ7IyYCoZTb1NaaLa_AeYBxCJeqRxX3tMa7nvr6eO1F75De6XCVwiSQ_F54hVaruE9UZyLakc4iIA',
+    progress: 75
+  },
+  {
+    subject: 'History',
+    teacher: 'Amy Adams',
+    color: 'secondary-container',
+    icon: 'article',
+    teacherImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBDX690UKVtjMnIxfuHsXyoyu0YahpRbozwZa8L2UEJ-w44Kd-us7nzFOkN_uoMQiFQrgzH34IhRNR8NpLHwlEkN__KE0aOTGO2Owzitinc3vS8thJugGnqz8HoouWxL_iss7IK3U-uJ4bVnGHp0tUfuM95dlta9mLIrUFb-5jOr2AFAW3gmSw7hlJM5kGH6lrConDdFjk5y3rEVeqtRh2BVRBd6gstkqvBpeRs5Nod42jWWhcbts34Ug',
+    progress: 60
+  },
+  {
+    subject: 'Math',
+    teacher: 'Amy Johnson',
+    color: 'tertiary-yellow',
+    icon: 'school',
+    teacherImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAAkj09cpe3G8aYPk5yQsRkdwNfWVfjqxaqvI9aeTOv5dLmVUG6hWDGZDm9wpUPvcz8BkJd0W0ZaeYSikeZ6jhDeWXOtw044j2R9X8Hci0Iwlgc53oyO1D1a3wC6fsiPD7TRi4Jojex4hBSR7GUzZ2OsMFvepIk-qu7y5heRkhkV42U9URWuam_4jgVlIjMZwoaWCKgquegE9c7KAWbOCHlR-IHp9XfuwjaOkphNdKOJ-2LxVLa8uOUxQ',
+    progress: 85
+  },
+  {
+    subject: 'Literature',
+    teacher: 'Emily Carter',
+    color: 'quaternary-green',
+    icon: 'book',
+    teacherImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAAkj09cpe3G8aYPk5yQsRkdwNfWVfjqxaqvI9aeTOv5dLmVUG6hWDGZDm9wpUPvcz8BkJd0W0ZaeYSikeZ6jhDeWXOtw044j2R9X8Hci0Iwlgc53oyO1D1a3wC6fsiPD7TRi4Jojex4hBSR7GUzZ2OsMFvepIk-qu7y5heRkhkV42U9URWuam_4jgVlIjMZwoaWCKgquegE9c7KAWbOCHlR-IHp9XfuwjaOkphNdKOJ-2LxVLa8uOUxQ',
+    progress: 50
+  }
+];
 
 export default function DashboardHome() {
-  const [summary, setSummary] = useState(null);
-  const [announcements, setAnnouncements] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [summaryRes, announcementsRes] = await Promise.all([
-          fetch('/api/dashboard/summary'),
-          fetch('/api/announcements')
-        ]);
-
-        if (!summaryRes.ok || !announcementsRes.ok) {
-          throw new Error('Failed to fetch data');
-        }
-
-        const summaryData = await summaryRes.json();
-        const announcementsData = await announcementsRes.json();
-
-        setSummary(summaryData);
-        setAnnouncements(announcementsData);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) return <div className="flex justify-center items-center h-screen">Loading...</div>;
-  if (error) return <div className="flex justify-center items-center h-screen text-error">{error}</div>;
-
   return (
     <div className="min-h-screen bg-background dark:bg-background">
       <header className="flex justify-between items-center px-container-margin py-4 w-full bg-background dark:bg-background">
@@ -56,59 +54,30 @@ export default function DashboardHome() {
           <span className="material-symbols-outlined text-primary">notifications</span>
         </button>
       </header>
-
       <main className="px-container-margin">
         <nav className="flex gap-2 overflow-x-auto py-4 no-scrollbar">
-          <QuickActionButton label="Forum" active={false} />
-          <QuickActionButton label="Add. classes" active={false} />
-          <QuickActionButton label="Lessons" active={true} />
+          <button className="px-6 py-2.5 rounded-full text-label-sm font-label-sm bg-surface-container-highest text-on-surface-variant hover:bg-surface-container-high transition-colors">
+            Forum
+          </button>
+          <button className="px-6 py-2.5 rounded-full text-label-sm font-label-sm bg-surface-container-highest text-on-surface-variant hover:bg-surface-container-high transition-colors">
+            Add. classes
+          </button>
+          <button className="px-6 py-2.5 rounded-full text-label-sm font-label-sm active-pill shadow-md shadow-primary/20 transition-all scale-105">
+            Lessons
+          </button>
         </nav>
-
         <div className="grid grid-cols-2 gap-4 mt-2">
-          {summary?.subjects?.map((subject) => (
-            <div
-              key={subject.id}
-              className={`rounded-3xl p-card-padding flex flex-col justify-between aspect-[4/5] relative overflow-hidden group active:scale-[0.98] transition-transform ${subject.bgColor}`}
-            >
-              <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors"></div>
-              <div className="flex justify-between items-start">
-                <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
-                  <span className="material-symbols-outlined text-white">{subject.icon}</span>
-                </div>
-              </div>
-              <div>
-                <h3 className="text-white font-headline-md text-headline-md mb-1">{subject.name}</h3>
-                <p className={`text-on-${subject.bgColor.split('-')[0]}-container text-label-sm font-label-sm opacity-90`}>
-                  Teacher: {subject.teacher}
-                </p>
-                <div className="mt-4 w-8 h-8 rounded-full overflow-hidden border border-white/30">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={subject.teacherImage}
-                    alt={subject.teacher}
-                  />
-                </div>
-              </div>
-            </div>
+          {subjects.map((subject, index) => (
+            <Card
+              key={index}
+              subject={subject.subject}
+              teacher={subject.teacher}
+              progress={subject.progress}
+              color={subject.color}
+              icon={subject.icon}
+              teacherImage={subject.teacherImage}
+            />
           ))}
-        </div>
-
-        <div className="mt-8">
-          <h2 className="font-headline-sm text-headline-sm font-bold text-primary mb-4">Announcements</h2>
-          <div className="space-y-4">
-            {announcements.map((announcement) => (
-              <AnnouncementCard key={announcement.id} announcement={announcement} />
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-8">
-          <h2 className="font-headline-sm text-headline-sm font-bold text-primary mb-4">Upcoming Deadlines</h2>
-          <div className="space-y-4">
-            {summary?.deadlines?.map((deadline) => (
-              <UpcomingDeadlineCard key={deadline.id} deadline={deadline} />
-            ))}
-          </div>
         </div>
       </main>
     </div>
